@@ -7,14 +7,20 @@ Created on Tue Mar 31 00:51:53 2026
 """
 
 def validar_registro(registro):
-    """
-    Verifica si un registro tiene tipos y valores válidos.
-    Parámetros:
-    - registro: dict
-    Retorna:
-    - bool
-    """
+    '''
+    
 
+     Verifica si un registro tiene las claves, tipos y valores válidos.
+    ----------
+    registro : dict
+      Diccionario con los datos de un ensayo.
+
+    Returns
+    -------
+    bool
+       True si el registro es válido, False en caso contrario.
+
+    '''
     claves_esperadas = [
         "id_participante",
         "trial",
@@ -42,7 +48,7 @@ def validar_registro(registro):
     if not isinstance(registro["t_inicio"], (int, float)):
         return False
 
-    if not isinstance(registro["respuesta"], (str, bool)):
+    if not isinstance(registro["respuesta"], ( bool)):
         return False
 
     if not isinstance(registro["tiempo_reaccion"], (int, float)):
@@ -54,7 +60,13 @@ def validar_registro(registro):
     if not isinstance(registro["condicion"], str):
         return False
 
-    if registro["trial"] < 0:
+    if registro["id_participante"] <= 0:
+        return False
+
+    if registro["trial"] <= 0:
+        return False
+
+    if registro["t_inicio"] < 0:
         return False
 
     if registro["tiempo_reaccion"] < 0:
@@ -68,9 +80,8 @@ def validar_registro(registro):
 
     if registro["condicion"].lower() not in ["alta_go", "balanceada"]:
         return False
-    
-    return True
 
+    return True
 
 
 
