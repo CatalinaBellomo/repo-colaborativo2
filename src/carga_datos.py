@@ -22,7 +22,6 @@ def parsear_linea(linea):
     '''
   
     valores = linea.strip().split(",")
-
     registro = {
         "id_participante": int(valores[0]),
         "trial": int(valores[1]),
