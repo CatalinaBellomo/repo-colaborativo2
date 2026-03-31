@@ -38,24 +38,26 @@ def parsear_linea(linea):
 
 def cargar_datos(ruta):
     """
-    Lee un archivo y devuelve una lista de registros.
-    -----------
+    Lee un archivo CSV y devuelve una lista de registros.
+
     Parámetros:
     - ruta: str
-    Ruta del archivo CSV.
-    
-    Returns 
-    ----------
-    -  datos: list
-    Lista de diccionarios, uno por cada línea del archivo.
+      Ruta del archivo CSV.
+
+    Returns
+    -------
+    - datos: list
+      Lista de diccionarios, uno por cada línea del archivo.
     """
     datos = []
 
     with open(ruta, "r") as archivo:
-           next(archivo)  # salta el encabezado
-           for linea in archivo:
-               registro = parsear_linea(linea)
-               datos.append(registro)
+        next(archivo)  # salta encabezado
+        for linea in archivo:
+            if linea.strip() == "":
+                continue
+            registro = parsear_linea(linea)
+            datos.append(registro)
 
     return datos
 
