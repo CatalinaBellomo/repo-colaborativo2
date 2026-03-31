@@ -48,7 +48,7 @@ def validar_registro(registro):
     if not isinstance(registro["t_inicio"], (int, float)):
         return False
 
-    if not isinstance(registro["respuesta"], ( bool)):
+    if not isinstance(registro["respuesta"],  bool):
         return False
 
     if not isinstance(registro["tiempo_reaccion"], (int, float)):
