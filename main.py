@@ -35,7 +35,5 @@ def main():
     print("Tasa de error:", tasa_error)
 
 
-main()
-
-
-
+if __name__ == "__main__":
+    main()
