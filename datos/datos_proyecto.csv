@@ -1,8 +1,0 @@
-id_participante,trial,estimulo,t_inicio,respuesta,tiempo_reaccion,resultado_respuesta,condicion
-1,1,go,0.0,True,0.45,correcta,alta_go
-1,2,nogo,1.0,False,0.0,correcta,alta_go
-1,3,go,2.0,True,0.52,incorrecta,alta_go
-2,1,go,0.0,True,0.40,correcta,balanceada
-2,2,nogo,1.0,False,0.0,correcta,balanceada
-
-
