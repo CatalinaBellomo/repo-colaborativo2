@@ -75,8 +75,8 @@ def validar_registro(registro):
     if registro["estimulo"].lower() not in ["go", "nogo"]:
         return False
 
-    if registro["resultado_respuesta"].lower() not in ["correcta", "incorrecta"]:
-        return False
+    if registro["resultado_respuesta"].lower() not in ["correcto", "incorrecto"]:
+       return False
 
     if registro["condicion"].lower() not in ["alta_go", "balanceada"]:
         return False
