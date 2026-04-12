@@ -16,7 +16,7 @@ def main():
     """
     Ejecuta el flujo principal del programa.
     """
-    ruta = "datos/BehaviorTracker_mock_data.csv"
+    ruta = "datos/ReflexLab_mock_data.csv"
 
     datos = cargar_datos(ruta)
 
