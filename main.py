@@ -24,9 +24,12 @@ def main():
     for registro in datos:
         if validar_registro(registro):
             datos_validos.append(registro)
+    
+
 
     id_participante = int(input("Ingrese el id del participante: "))
     datos_participante = filtrar_por_participante(datos_validos, id_participante)
+    
 
     promedio = calcular_tiempo_reaccion_promedio(datos_participante)
     tasa_error = calcular_tasa_error(datos_participante)
