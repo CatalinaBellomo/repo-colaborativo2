@@ -49,7 +49,7 @@ def calcular_tasa_error(datos):
     errores = 0
 
     for registro in datos:
-        if registro["resultado_respuesta"].lower() == "incorrecta":
+        if registro["resultado_respuesta"].lower() == "incorrecto":
             errores += 1
 
     return errores / len(datos)
