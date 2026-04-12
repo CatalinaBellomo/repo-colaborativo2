@@ -52,7 +52,6 @@ def cargar_datos(ruta):
     datos = []
 
     with open(ruta, "r") as archivo:
-        next(archivo)  # salta encabezado
         for linea in archivo:
             if linea.strip() == "":
                 continue
