@@ -21,16 +21,8 @@ def validar_registro(registro):
        True si el registro es válido, False en caso contrario.
 
     '''
-    claves_esperadas = [
-        "id_participante",
-        "trial",
-        "estimulo",
-        "t_inicio",
-        "respuesta",
-        "tiempo_reaccion",
-        "resultado_respuesta",
-        "condicion"
-    ]
+    claves_esperadas = ["id_participante","trial","estimulo","t_inicio",
+        "respuesta","tiempo_reaccion","resultado_respuesta","condicion"]
 
     for clave in claves_esperadas:
         if clave not in registro:
@@ -83,7 +75,29 @@ def validar_registro(registro):
 
     return True
 
-
+    for i in range(len(registro)):
+        try:
+            int(registro.loc[i, "id_participante"])
+        except:
+            raise TypeError(f"ERROR: en fila {i}: id no es un número")
+    
+    
+        try:
+            int(registro.loc[i, "trial"])
+        except:
+            raise TypeError(f"error: en fila {i}: intento no es un número")
+    
+    
+        try:
+            float(registro.loc[i, "t_inicio"])
+        except:
+            raise TypeError(f"error: en fila {i}: tiempo_estimulo no es un número")
+    
+    
+        try:
+            float(registro.loc[i, "tiempo_reaccion"])
+        except:
+            raise TypeError(f"error: en fila {i}: tiempo_reaccion no es un número")
 
 
 
