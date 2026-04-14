@@ -8,7 +8,8 @@ Created on Tue Mar 31 00:52:40 2026
 
 def calcular_tiempo_reaccion_promedio(datos):
     """
-    Calcula el tiempo de reacción promedio de una lista de registros.
+    Calcula el tiempo de reacción promedio de una lista de registros,
+    considerando solo los tiempos mayores a 0.
 
     Parámetros:
     - datos: list
@@ -25,8 +26,13 @@ def calcular_tiempo_reaccion_promedio(datos):
     cantidad = 0
 
     for registro in datos:
-        suma_tiempos += registro["tiempo_reaccion"]
-        cantidad += 1
+        # Solo se consideran tiempos de reacción mayores a 0, ya que los valores 0 representan ausencia de respuesta registrada y no un tiempo de reacción real.
+        if registro["tiempo_reaccion"] > 0:
+            suma_tiempos += registro["tiempo_reaccion"]
+            cantidad += 1
+   
+    if cantidad == 0:
+        return 0.0
 
     return suma_tiempos / cantidad
 

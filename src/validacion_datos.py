@@ -75,29 +75,5 @@ def validar_registro(registro):
 
     return True
 
-    for i in range(len(registro)):
-        try:
-            int(registro.loc[i, "id_participante"])
-        except:
-            raise TypeError(f"ERROR: en fila {i}: id no es un número")
-    
-    
-        try:
-            int(registro.loc[i, "trial"])
-        except:
-            raise TypeError(f"error: en fila {i}: intento no es un número")
-    
-    
-        try:
-            float(registro.loc[i, "t_inicio"])
-        except:
-            raise TypeError(f"error: en fila {i}: tiempo_estimulo no es un número")
-    
-    
-        try:
-            float(registro.loc[i, "tiempo_reaccion"])
-        except:
-            raise TypeError(f"error: en fila {i}: tiempo_reaccion no es un número")
-
-
+   
 
