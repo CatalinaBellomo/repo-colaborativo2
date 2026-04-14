@@ -114,7 +114,6 @@ Se contemplan los siguientes casos:
 En todos los casos se muestra un mensaje claro en consola indicando el problema detectado.
 
 ## Uso de herramientas de IA
-Se utilizó IA como herramienta de consulta y apoyo para revisar lógica del código, validaciones, manejo de errores y redacción de documentación. El desarrollo, corrección e integración final del sistema fue realizado por el grupo.
-
+Se utilizó IA como herramienta de consulta y apoyo para revisar lógica del código, validaciones, manejo de errores.
 
 
