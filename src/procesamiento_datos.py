@@ -20,13 +20,12 @@ def filtrar_por_participante(datos, id_participante):
     - list
         Lista con los registros del participante indicado.
     """
-    datos_filtrados = []
 
-    for registro in datos:
-        if registro["id_participante"] == id_participante:
-            datos_filtrados.append(registro)
+    for participante in datos:
+        if participante["id_participante"] == id_participante:
+            return participante["ensayos"]
 
-    return datos_filtrados
+    return []
 
 
 

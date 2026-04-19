@@ -30,6 +30,12 @@ def parsear_linea(linea):
   
     try: 
         valores = linea.strip().split(",")
+        if len(valores) != 8:
+           raise IndexError("La línea no tiene la cantidad correcta de columnas.")
+        if any(valor.strip() == "" for valor in valores):
+           raise ValueError("Hay campos vacíos donde no corresponde.")
+        if valores[4].strip() not in ["True", "False"]:
+           raise ValueError("respuesta debe ser 'True' o 'False'.")
         registro = {
         "id_participante": int(valores[0]),
         "trial": int(valores[1]),

@@ -67,15 +67,15 @@ def main():
 
      # Error si no se encuentra el archivo CSV
     except FileNotFoundError as e:
-        print(f"Error: no se encontró el archivo de datos {e}")
+        print(f"[ERROR CRÍTICO] Tipo de error encontrado: {e} | Ubicación: main")
 
       # Error si ocurre un problema con los datos o con el ID ingresado
     except ValueError as e:
-        print(f"Se produjo un error en los datos ingresados: {e}")
+       print(f"[ERROR CRÍTICO] Tipo de error encontrado: {e} | Ubicación: main")
     
     # Captura cualquier otro error inesperado
     except Exception as e:
-        print(f"Ocurrió un error inesperado durante la ejecución en el programa: {e}")
+       print(f"[ERROR CRÍTICO] Tipo de error encontrado: {e} | Ubicación: main")
 
   
 # Ejecuta la función principal solo si este archivo se corre directamente
