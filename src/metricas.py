@@ -59,3 +59,4 @@ def calcular_tasa_error(datos):
             errores += 1
 
     return errores / len(datos)
+

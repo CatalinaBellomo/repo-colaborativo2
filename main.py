@@ -7,9 +7,10 @@ Created on Tue Mar 31 00:58:02 2026
 """
 # Importa las funciones necesarias para cargar, validar, filtrar y analizar los datos del experimento
 from src.carga_datos import cargar_datos
-from src.validacion_datos import validar_registro
+from src.validacion_datos import validar_registro, validar_tiempo_creciente
 from src.procesamiento_datos import filtrar_por_participante
 from src.metricas import calcular_tiempo_reaccion_promedio, calcular_tasa_error
+
 
 
 def main():
@@ -30,30 +31,35 @@ def main():
 
     try: 
         # Se define la ruta del archivo CSV con los datos 
-        ruta = "datos/ReflexLab_mock_data_error01.csv"
-        
+        ruta = "datos/ReflexLab_mock_data_error05.csv"
 
          # Se cargan todos los registros del archivo
         datos = cargar_datos(ruta)
-
-         # Se crea una lista para guardar solo los registros válidos
-        datos_validos = []
-       
-        # Se recorre cada registro y se verifica si cumple las validaciones 
-        for registro in datos:
-            if validar_registro(registro):
-                datos_validos.append(registro)
         
+        for participante in datos:
+            for ensayo in participante["ensayos"]:
+                registro_completo = {
+            "id_participante": participante["id_participante"],
+            "trial": ensayo["trial"],
+            "estimulo": ensayo["estimulo"],
+            "t_inicio": ensayo["t_inicio"],
+            "respuesta": ensayo["respuesta"],
+            "tiempo_reaccion": ensayo["tiempo_reaccion"],
+            "resultado_respuesta": ensayo["resultado_respuesta"],
+            "condicion": ensayo["condicion"] }
+            
+            validar_registro(registro_completo)
+
+        validar_tiempo_creciente(datos)
+              
+       
+        id_participante = int(input("Ingrese el id del participante: "))
+        datos_participante = filtrar_por_participante(datos, id_participante)
+       
         # Si no hay registros válidos, se detiene la ejecución con un error
-        if len(datos_validos) == 0:
+        if len(datos_participante) == 0:
             raise ValueError("No se encontraron registros válidos.")
 
-        # Se pide al usuario el ID del participante a analizar
-        id_participante = int(input("Ingrese el id del participante: "))
-        
-        # Se filtran solo los datos del participante ingresado
-        datos_participante = filtrar_por_participante(datos_validos, id_participante)
-        
         # Si no se encontraron datos para ese participante, se informa el error
         if len(datos_participante) == 0:
             raise ValueError(f"No existe el participante con ID {id_participante}.")
