@@ -69,19 +69,43 @@ def cargar_datos(ruta):
     """
     datos = []
     
-    try: 
+    try:
 
         with open(ruta, "r") as archivo:
             for linea in archivo:
                 if linea.strip() == "":
                     continue
                 registro = parsear_linea(linea)
-                datos.append(registro)
-   
+                id_participante = registro["id_participante"]
+                participante_encontrado = None
+                for participante in datos:
+                    if participante["id_participante"] == id_participante:
+                        participante_encontrado = participante
+                        break
+                ensayo = {
+
+                    "trial": registro["trial"],
+                    "estimulo": registro["estimulo"],
+                    "t_inicio": registro["t_inicio"],
+                    "respuesta": registro["respuesta"],
+                    "tiempo_reaccion": registro["tiempo_reaccion"],
+                    "resultado_respuesta": registro["resultado_respuesta"],
+                    "condicion": registro["condicion"]
+
+                }
+
+                if participante_encontrado is None:
+                    nuevo_participante = {
+                        "id_participante": id_participante,
+                        "ensayos": [ensayo]
+                    }
+                    datos.append(nuevo_participante)
+                else:
+                    participante_encontrado["ensayos"].append(ensayo)
+
     except FileNotFoundError as e:
         raise FileNotFoundError(
             f"Error en cargar_datos: no se encontró el archivo '{ruta}'."
         ) from e
-
     return datos
 

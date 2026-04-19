@@ -30,7 +30,8 @@ def main():
 
     try: 
         # Se define la ruta del archivo CSV con los datos 
-        ruta = "datos/ReflexLab_mock_data.csv"
+        ruta = "datos/ReflexLab_mock_data_error01.csv"
+        
 
          # Se cargan todos los registros del archivo
         datos = cargar_datos(ruta)
