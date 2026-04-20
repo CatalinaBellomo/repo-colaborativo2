@@ -20,7 +20,7 @@ def filtrar_por_participante(datos, id_participante):
     - list
         Lista con los registros del participante indicado.
     """
-
+# por cada participante en la lista 'datos'recorre su identificador numerico y devuelve una lista con los registros de in participante en particular.
     for participante in datos:
         if participante["id_participante"] == id_participante:
             return participante["ensayos"]
