@@ -75,13 +75,33 @@ def validar_registro(registro):
     return True
 
 def validar_tiempo_creciente(datos):
+    """
+    Verifica que los tiempos de inicio (t_inicio) estén en orden creciente
+    dentro de los ensayos de cada participante.
+
+    Parámetros
+    ----------
+    datos : list
+        Lista de participantes con sus ensayos.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        Si algún participante tiene tiempos t_inicio desordenados.
+    """
+    # Recorre cada participante de la lista
     for participante in datos:
         tiempos = []
-
+        # Guarda todos los tiempos de inicio de sus ensayos
         for ensayo in participante["ensayos"]:
             tiempos.append(ensayo["t_inicio"])
-
+        # Compara cada tiempo con el anterior
         for i in range(1, len(tiempos)):
+            # Si uno es menor al anterior, no está en orden creciente
             if tiempos[i] < tiempos[i - 1]:
                 raise ValueError(
                     f"El tiempo t_inicio no está en orden creciente para el participante {participante['id_participante']}.")
