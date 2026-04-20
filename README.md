@@ -116,4 +116,36 @@ En todos los casos se muestra un mensaje claro en consola indicando el problema 
 ## Uso de herramientas de IA
 Se utilizó IA como herramienta de consulta y apoyo para revisar lógica del código, validaciones, manejo de errores.
 
-
+##Moldeo del sistema usando Objetos:
+- Clase Trial: representa ensayo ndividual de la tarea Go/No-Go
+    - Atributos:
+        - 'estimulo' / str / tipo de estimulo presentadon('go' o 'nogo'
+        - 't_inicio' / float / tiempo de inicio del estimulo
+        - 'respuesta' / 'bool' / si el participante respondio o no
+        - 'tiempo_reaccion' / float / tiempo transcurrido hasta la respuesta
+        - 'resultado_respuesta' / str / si fue correcta o incorrecta
+  - Metodo:
+      - es_correcto() / devuelve 'True' si el resultado fue correcto
+      - es_error_comision() / devuele 'True' si recpondio ante estimulo No-Go
+      - es_error_omision()/ devuelve 'True' si no respondio ante un estimulo Go
+   
+- Clase Paticipante:Represente a un participante y agrupa todos sus ensayos
+    Atributos:
+      -   id_participante / int / identificador unico del participante
+      - condicion / str / condicion experimental
+      - trials / list[trial] / lista de ensayos del participante
+  Metodo:
+    - 'agregar_trial(trial)' / agrega un objeto 'Trial' a la lista
+    - 'calcular_tiempo_reaccion_promedio()' / retorna el promedio de tiempos de reaccion
+    - calcular_tasa_error()' / retorna proporcion de respuestas incorrectas
+    - 'contar_errores_comision()' / cuenta respuestas ante estimulos No-Go
+    - 'contar_errores_omision()' / cuenta ausencias de respuesta ante estimulos Go
+ 
+- Clase EExperimento: Contiene y gestiona participantes cargados
+  Atributos:
+    - participantrs / list[participante] / lista de todos los participantes
+  Metodo:
+    - 'cargar_desde_archivo(ruta)'/lee el CSV y construye los objetos 'Participante' y 'Trial'
+    - 'buscar_participante(id_participante)' / retorna el 'participante' con ese ID
+    - 'resumen_general()' / muestra metricas agregadas de todos los participantes 
+  
