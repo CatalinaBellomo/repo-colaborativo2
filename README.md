@@ -147,5 +147,48 @@ Se utilizó IA como herramienta de consulta y apoyo para revisar lógica del có
   Metodo:
     - 'cargar_desde_archivo(ruta)'/lee el CSV y construye los objetos 'Participante' y 'Trial'
     - 'buscar_participante(id_participante)' / retorna el 'participante' con ese ID
-    - 'resumen_general()' / muestra metricas agregadas de todos los participantes 
-  
+    - 'resumen_general()' / muestra metricas agregadas de todos los participantes
+
+## Implementación de Pandas para la lectura del dataset
+
+ La lectura del CSV se realiza línea por línea con Python. La librería Pandas permitiría 
+reemplazar esa lógica con una sola llamada que gestiona automáticamente los tipos de datos, encabezados, 
+los valores que faltan y errores de formato, simplificando el código 
+
+### ¿Cómo se implementaría?
+
+1. Se importaría `pandas` al inicio de `carga_datos.py` con `import pandas as pd`.
+2. Se utilizaría `pd.read_csv(ruta)` para leer el archivo completo de una sola vez, obteniendo un `DataFrame` 
+con todas las filas 
+y columnas nombradas automáticamente a partir del encabezado del CSV.
+3. Cada fila del DataFrame se convertiría en un diccionario con `.to_dict('records')` 
+para mantener coherencia con el resto del sistema.
+4. El manejo de errores críticos (como archivo no encontrado) seguiría realizándose 
+con `try-except FileNotFoundError`, igual que en la implementación actual.
+
+### Funciones que deberían modificarse
+ 1- cargar_datos(ruta) en carga_datos 
+ Reemplazar el loop manual de lectura de líneas por `pd.read_csv(ruta)`
+ 2- parsear_linea(linea) tambien en carga_datos
+ podría eliminarse, ya que Pandas infiere y convierte los tipos de datos automáticamente 
+3- cargar_desde_archivo(ruta) en Clase Experimento .Adaptar para construir objetos Trial y Participante 
+iterando sobre el DataFrame
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
