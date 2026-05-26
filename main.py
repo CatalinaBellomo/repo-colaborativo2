@@ -5,9 +5,10 @@ Created on Tue Mar 31 00:58:02 2026
 
 @author: catalinabellomo
 """
-# Importa las funciones necesarias para cargar, validar, filtrar y analizar los datos del experimento
+
 
 import os
+os.chdir("/Users/catalinabellomo/Documents/GitHub/repo-colaborativo2")
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -112,7 +113,7 @@ def grafico_boxplot_tr_sujeto(df):
     plt.figure(figsize=(9, 5))
     plt.boxplot(
         datos_por_sujeto,
-        tick_labels=etiquetas,
+        labels=etiquetas,
         patch_artist=True,
         boxprops=dict(facecolor="#cbd5e1", color="#0f172a"),
         medianprops=dict(color="#b45309", linewidth=2)
@@ -189,19 +190,23 @@ def main():
 
         # ── Paso 5: generar gráficos ───────────────────────────────────────────
         os.makedirs(CARPETA_GRAFICOS, exist_ok=True)
-        grafico_barras_tiempo_reaccion_condicion
+        grafico_barras_tiempo_reaccion_condicion(df)
         grafico_lineas_tr_sujeto(df)
         grafico_boxplot_tr_sujeto(df)
 
         # ── Paso 6: consulta por participante (igual que antes) ───────────────
         id_participante = int(input("\nIngrese el id del participante: "))
-        datos_participante = filtrar_por_participante(datos, id_participante)
+        df_participante = df[df["id_participante"] == id_participante]
 
-        if len(datos_participante) == 0:
-            raise ValueError(f"No existe el participante con ID {id_participante}.")
+        if df_participante.empty:
+           raise ValueError(f"No existe el participante con ID {id_participante}.")
 
-        promedio = calcular_tiempo_reaccion_promedio(datos_participante)
-        tasa_error = calcular_tasa_error(datos_participante)
+        registros = df_participante.rename(
+    columns={"resultado": "resultado_respuesta"}
+).to_dict(orient="records")
+
+        promedio = calcular_tiempo_reaccion_promedio(registros)
+        tasa_error = calcular_tasa_error(registros)
 
         print(f"\nParticipante {id_participante}:")
         print(f"  Tiempo de reacción promedio : {promedio:.2f} ms")
