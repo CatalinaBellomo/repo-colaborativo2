@@ -13,10 +13,11 @@ import matplotlib.pyplot as plt
 
 
 from src.carga_datos import cargar_datos
-from src.validacion_datos import validar_registro, validar_tiempo_creciente
 from src.procesamiento_datos import filtrar_por_participante
 from src.metricas import calcular_tiempo_reaccion_promedio, calcular_tasa_error
 
+RUTA_CSV = "datos/ReflexLab_mock_data.csv"
+CARPETA_GRAFICOS = "graficos"
 
 def grafico_barras_tiempo_reaccion_condicion(df):
     """
@@ -149,40 +150,9 @@ def main():
     """
     try:
         # ── Paso 1: carga y validación con src/ (igual que antes) ────────────
-        datos = cargar_datos("datos/ReflexLab_mock_data.csv")
+        df = cargar_datos("datos/ReflexLab_mock_data.csv")
 
-        for participante in datos:
-            for ensayo in participante["ensayos"]:
-                registro_completo = {
-                    "id_participante": participante["id_participante"],
-                    "trial": ensayo["trial"],
-                    "estimulo": ensayo["estimulo"],
-                    "t_inicio": ensayo["t_inicio"],
-                    "respuesta": ensayo["respuesta"],
-                    "tiempo_reaccion": ensayo["tiempo_reaccion"],
-                    "resultado_respuesta": ensayo["resultado_respuesta"],
-                    "condicion": ensayo["condicion"]
-                }
-                validar_registro(registro_completo)
-
-        validar_tiempo_creciente(datos)
-        print("[OK] Validaciones de src/ superadas correctamente.")
-
-        # ── Paso 2: convertir a DataFrame de Pandas ───────────────────────────
-        filas = []
-        for participante in datos:
-            for ensayo in participante["ensayos"]:
-                filas.append({
-                    "id_participante": participante["id_participante"],
-                    "trial": ensayo["trial"],
-                    "estimulo": ensayo["estimulo"],
-                    "tiempo": ensayo["t_inicio"],
-                    "respuesta": ensayo["respuesta"],
-                    "tiempo_reaccion": ensayo["tiempo_reaccion"],
-                    "resultado": ensayo["resultado_respuesta"],
-                    "condicion": ensayo["condicion"]
-                })
-        df = pd.DataFrame(filas)
+     
 
         # ── Paso 3: validaciones vectorizadas con Pandas (sin bucles) ─────────
         if df.isna().any().any():
