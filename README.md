@@ -166,13 +166,7 @@ para mantener coherencia con el resto del sistema.
 4. El manejo de errores críticos (como archivo no encontrado) seguiría realizándose 
 con `try-except FileNotFoundError`, igual que en la implementación actual.
 
-### Funciones que deberían modificarse
- 1- cargar_datos(ruta) en carga_datos 
- Reemplazar el loop manual de lectura de líneas por `pd.read_csv(ruta)`
- 2- parsear_linea(linea) tambien en carga_datos
- podría eliminarse, ya que Pandas infiere y convierte los tipos de datos automáticamente 
-3- cargar_desde_archivo(ruta) en Clase Experimento .Adaptar para construir objetos Trial y Participante 
-iterando sobre el DataFrame
+
  
  
  
