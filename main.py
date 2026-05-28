@@ -16,8 +16,9 @@ import matplotlib.pyplot as plt
 from src.carga_datos import cargar_datos
 from src.procesamiento_datos import filtrar_por_participante
 from src.metricas import calcular_tiempo_reaccion_promedio, calcular_tasa_error
-
+# Ruta al archivo CSV con los datos del experimento
 RUTA_CSV = "datos/ReflexLab_mock_data.csv"
+# Carpeta donde se guardarán los gráficos generados
 CARPETA_GRAFICOS = "graficos"
 
 def grafico_barras_tiempo_reaccion_condicion(df):
@@ -30,9 +31,12 @@ def grafico_barras_tiempo_reaccion_condicion(df):
     df : pd.DataFrame
         DataFrame con los datos del experimento (solo ensayos go con TR > 0).
     """
+   
+    # Filtra solo ensayos go con tiempo de reacción mayor a 0
     df_go = df[(df["estimulo"] == "go") & (df["tiempo_reaccion"] > 0)]
+    # Calcula el promedio de tiempo de reacción agrupado por condición
     tr_por_condicion = df_go.groupby("condicion")["tiempo_reaccion"].mean().round(2)
-
+# Crea el lienzo del gráfico
     plt.figure(figsize=(9, 5))
     tr_por_condicion.plot(
         kind="bar",
@@ -40,6 +44,7 @@ def grafico_barras_tiempo_reaccion_condicion(df):
         edgecolor="black",
         alpha=0.85
     )
+    # Configura título y etiquetas de ejes
     plt.title(
         "Tiempo de Reacción Promedio por Condición Experimental",
         fontsize=13, fontweight="bold", pad=15
@@ -49,7 +54,7 @@ def grafico_barras_tiempo_reaccion_condicion(df):
     plt.xticks(rotation=0)
     plt.grid(True, linestyle="--", alpha=0.5, axis="y")
     plt.tight_layout()
-
+  # Arma la ruta de destino y guarda el gráfico como PNG
     ruta = os.path.join(CARPETA_GRAFICOS, "comparacion_condiciones.png")
     plt.savefig(ruta, dpi=300)
     plt.close()
@@ -66,8 +71,9 @@ def grafico_lineas_tr_sujeto(df):
     df : pd.DataFrame
         DataFrame con los datos del experimento.
     """
+    # Filtra solo ensayos go con tiempo de reacción mayor a 0
     df_go = df[(df["estimulo"] == "go") & (df["tiempo_reaccion"] > 0)]
-
+    # Crea el lienzo del gráfico
     plt.figure(figsize=(11, 5))
     for sujeto_id, grupo in df_go.groupby("id_participante"):
         plt.plot(
@@ -103,11 +109,12 @@ def grafico_boxplot_tr_sujeto(df):
         DataFrame con los datos del experimento.
     """
     df_go = df[(df["estimulo"] == "go") & (df["tiempo_reaccion"] > 0)]
-
+  # Arma una lista con los valores de TR de cada participante por separado
     datos_por_sujeto = [
         grupo["tiempo_reaccion"].values
         for _, grupo in df_go.groupby("id_participante")
     ]
+    # Crea las etiquetas del eje X con el ID de cada participante
     etiquetas = [f"S{s}" for s in df_go["id_participante"].unique()]
 
     plt.figure(figsize=(9, 5))
@@ -150,12 +157,14 @@ def main():
         Si no se encuentran registros válidos o el ID ingresado no existe.
     """
     try:
-        # ── Paso 1: carga y validación con src/ (igual que antes) ────────────
+#Carga del CSV con Pandas
+# Reemplaza el paradigma manual (with open / split) por pd.read_csv()
+
         df = cargar_datos("datos/ReflexLab_mock_data.csv")
 
      
 
-        # ── Paso 3: validaciones vectorizadas con Pandas (sin bucles) ─────────
+        #validaciones vectorizadas con Pandas (sin bucles)
         if df.isna().any().any():
             raise ValueError("El DataFrame contiene valores NaN.")
 

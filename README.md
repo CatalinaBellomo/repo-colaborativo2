@@ -20,7 +20,7 @@ El objetivo del programa es leer datos de una tarea cognitiva tipo Go/No-Go, val
 
 ## Estructura
 - src/: funciones del sistema
-- `src/carga_datos.py`: carga y parsea los datos desde el archivo CSV.
+- `src/carga_datos.py`: carga el archivo CSV usando pd.read_csv() y devuelve un DataFrame de Pandas.
 - `src/validacion_datos.py`: valida que cada registro tenga la estructura, tipos y valores correctos.
 - `src/procesamiento_datos.py`: filtra los registros por participante.
 - `src/metricas.py`: calcula métricas a partir de los datos validados.
@@ -151,20 +151,20 @@ Se utilizó IA como herramienta de consulta y apoyo para revisar lógica del có
 
 ## Implementación de Pandas para la lectura del dataset
 
- La lectura del CSV se realiza línea por línea con Python. La librería Pandas permitiría 
-reemplazar esa lógica con una sola llamada que gestiona automáticamente los tipos de datos, encabezados, 
-los valores que faltan y errores de formato, simplificando el código 
+La carga del CSV se realiza con `pd.read_csv()` en `src/carga_datos.py`, 
+reemplazando el procesamiento manual línea por línea.
 
-### ¿Cómo se implementaría?
+Las validaciones se aplican de forma vectorizada en `main.py` usando 
+`.isna()`, `.any()`, `.all()` e `.isin()`, sin bucles for/while.
 
-1. Se importaría `pandas` al inicio de `carga_datos.py` con `import pandas as pd`.
-2. Se utilizaría `pd.read_csv(ruta)` para leer el archivo completo de una sola vez, obteniendo un `DataFrame` 
-con todas las filas 
-y columnas nombradas automáticamente a partir del encabezado del CSV.
-3. Cada fila del DataFrame se convertiría en un diccionario con `.to_dict('records')` 
-para mantener coherencia con el resto del sistema.
-4. El manejo de errores críticos (como archivo no encontrado) seguiría realizándose 
-con `try-except FileNotFoundError`, igual que en la implementación actual.
+Las métricas se calculan con `groupby()` directamente sobre el DataFrame.
+
+Los gráficos se generan con Matplotlib y se exportan automáticamente 
+en la carpeta `graficos/`:
+- `comparacion_condiciones.png`: barras con TR promedio por condición
+- `evolucion_temporal.png`: líneas con evolución del TR por trial
+- `distribucion_por_sujeto.png`: boxplot de distribución por participante
+
 
 
  
