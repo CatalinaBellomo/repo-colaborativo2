@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Tue Mar 31 00:50:30 2026
+Created on Tue Mar 31 00:58:02 2026
 
 @author: catalinabellomo
 """
 
+<<<<<<< HEAD
 def parsear_linea(linea):
     """
     Convierte una línea del archivo en un diccionario.
@@ -20,16 +19,40 @@ def parsear_linea(linea):
     valores[5] = float(valores[5]) if valores[5] != '' else None
     return valores
     pass
+=======
+import os
+import pandas as pd
+# Nombres de las columnas del CSV en el orden en que aparecen
+COLUMNAS = [
+    "id_participante", "trial", "estimulo", "tiempo",
+    "respuesta", "tiempo_reaccion", "resultado", "condicion"
+]
+>>>>>>> 570708aa9447edfe403161b56c34d3829cc9e7c4
 
 
 def cargar_datos(ruta):
     """
-    Lee un archivo y devuelve una lista de registros.
-    Parámetros:
-    - ruta: str
-    Retorna:
-    - list
+    Carga el archivo CSV del experimento en un DataFrame de Pandas.
+
+    Reemplaza el procesamiento manual línea por línea (with open, split(","))
+    por una carga inmediata y vectorizada con pd.read_csv().
+
+    Parametros
+    ----------
+    ruta : str
+        Ruta al archivo CSV con los datos del experimento.
+
+    Returns
+    -------
+    df : pd.DataFrame
+        DataFrame con los datos cargados y columnas nombradas.
+
+    Raises
+    ------
+    FileNotFoundError
+        Si el archivo no existe en la ruta indicada.
     """
+<<<<<<< HEAD
     registro_participante = {}
     with open(ruta, 'r') as archivo:
         next(archivo)
@@ -49,3 +72,15 @@ def cargar_datos(ruta):
     pass
 
 
+=======
+    # Verifica que el archivo exista antes de intentar abrirlo
+    if not os.path.exists(ruta):
+        raise FileNotFoundError(
+            f"Error en cargar_datos: no se encontró el archivo '{ruta}'."
+        )
+ # Carga el CSV completo en un DataFrame asignando los nombres de columna
+    # header=None indica que el archivo no tiene fila de encabezado
+    df = pd.read_csv(ruta, header=None, names=COLUMNAS)
+    print(f"[OK] Archivo cargado: {len(df)} registros, {len(df.columns)} columnas.")
+    return df
+>>>>>>> 570708aa9447edfe403161b56c34d3829cc9e7c4
