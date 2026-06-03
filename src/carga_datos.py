@@ -18,15 +18,13 @@ def parsear_linea(linea):
     valores[5] = float(valores[5]) if valores[5] != '' else None
     return valores
     pass
-=======
+
 import os
 import pandas as pd
 # Nombres de las columnas del CSV en el orden en que aparecen
 COLUMNAS = [
     "id_participante", "trial", "estimulo", "tiempo",
-    "respuesta", "tiempo_reaccion", "resultado", "condicion"
-]
->>>>>>> 570708aa9447edfe403161b56c34d3829cc9e7c4
+    "respuesta", "tiempo_reaccion", "resultado", "condicion"]
 
 
 def cargar_datos(ruta):
@@ -51,7 +49,7 @@ def cargar_datos(ruta):
     FileNotFoundError
         Si el archivo no existe en la ruta indicada.
     """
-<<<<<<< HEAD
+
     registro_participante = {}
     with open(ruta, 'r') as archivo:
         next(archivo)
@@ -71,7 +69,7 @@ def cargar_datos(ruta):
     pass
 
 
-=======
+
     # Verifica que el archivo exista antes de intentar abrirlo
     if not os.path.exists(ruta):
         raise FileNotFoundError(
@@ -82,4 +80,4 @@ def cargar_datos(ruta):
     df = pd.read_csv(ruta, header=None, names=COLUMNAS)
     print(f"[OK] Archivo cargado: {len(df)} registros, {len(df.columns)} columnas.")
     return df
->>>>>>> 570708aa9447edfe403161b56c34d3829cc9e7c4
+
