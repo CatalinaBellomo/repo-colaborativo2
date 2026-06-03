@@ -12,21 +12,50 @@ Este repositorio contiene el desarrollo colaborativo del proyecto ReflexLab.
 El objetivo del programa es leer datos de una tarea cognitiva tipo Go/No-Go, validarlos, procesarlos y calcular métricas básicas de desempeño, como el tiempo de reacción promedio y la tasa de error.
 
 
+
+
 ## Integrantes
 - Catalina Bellomo
 - Ana Maria Piuma 
 - Matilda Ivancich
 - Allegra Gegenschatz
 
+## Requisito:
+Las siguientes librerías (instalables con pip):
+
+bashpip install pandas matplotlib streamlit
+
+##Instalación y uso
+Instalación y uso
+1. Clonar el repositorio
+bashgit clone https://github.com/<usuario>/repo-colaborativo2.git
+cd repo-colaborativo2
+2. Instalar dependencias
+bashpip install pandas matplotlib streamlit
+3. Correr la aplicación
+bashpython3 -m streamlit run app.py
+La app se abre automáticamente en el navegador en
+4.  Cargar ReflexLab_mock_data.csv
+
 ## Estructura
-- src/: funciones del sistema
-- `src/carga_datos.py`: carga el archivo CSV usando pd.read_csv() y devuelve un DataFrame de Pandas.
-- `src/validacion_datos.py`: valida que cada registro tenga la estructura, tipos y valores correctos.
-- `src/procesamiento_datos.py`: filtra los registros por participante.
-- `src/metricas.py`: calcula métricas a partir de los datos validados.
-- main.py: programa principal
-- datos/: archivos de datos
-- diagramas/: diagramas del sistema
+repo-colaborativo2/
+│
+├── app.py                        # Interfaz Streamlit
+├── main.py                       # Programa principal por consola
+│
+├── src/
+│   ├── carga_datos.py            # Carga del CSV con pd.read_csv()
+│   ├── validacion_datos.py       # Validación de tipos, rangos y valores
+│   ├── procesamiento_datos.py    # Filtrado de registros por participante
+│   └── metricas.py               # Cálculo de métricas de desempeño
+│
+├── datos/                        # Archivos CSV de entrada
+├── graficos/                     # Gráficos generados automáticamente
+│   ├── comparacion_condiciones.png
+│   ├── evolucion_temporal.png
+│   └── distribucion_por_sujeto.png
+├── diagramas/                    # Diagramas del sistema
+└── README.md
 
 ## Funciones principales
 - `carga_datos.py`: lectura y transformación de datos
