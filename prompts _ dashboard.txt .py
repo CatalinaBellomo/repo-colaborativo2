@@ -6,9 +6,7 @@ Created on Mon Jun  1 01:16:29 2026
 @author: catalinabellomo
 """
 
-----------------------------------------------------------------
 1. PROMPT SEMILLA (ROCA)
-----------------------------------------------------------------
 
 ROL:
 Sos un experto en desarrollo de interfaces web con Python y Streamlit,
@@ -44,9 +42,8 @@ Programá el archivo app.py con Streamlit que cumpla este flujo:
 4. 3 gráficos con st.pyplot: barras, líneas y boxplot
 5. Selector de participante con st.selectbox para consulta individual
 
-----------------------------------------------------------------
+
 2. REGISTRO DE ITERACIONES Y CORRECCIONES
-----------------------------------------------------------------
 
 ITERACIÓN 1:
 La IA generó el código usando importaciones absolutas que fallaban
@@ -59,9 +56,8 @@ en la carpeta src/ independientemente de desde dónde se corra el script."
 
 RESULTADO: Se agregó sys.path.append() para resolver el problema.
 
-----------------------------------------------------------------
 3. REFLEXIÓN TÉCNICA
-----------------------------------------------------------------
+
 
 La estrategia que mejor funcionó fue estructurar el prompt con el método
 ROCA (Rol, Objetivo, Contexto, Acción) y adjuntar el diseño.md con la
