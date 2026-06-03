@@ -4,7 +4,6 @@ Created on Tue Mar 31 00:58:02 2026
 @author: catalinabellomo
 """
 
-<<<<<<< HEAD
 def parsear_linea(linea):
     """
     Convierte una línea del archivo en un diccionario.
